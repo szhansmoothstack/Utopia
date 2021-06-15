@@ -34,4 +34,13 @@ public class BookingGuest {
     public void setContactPhone(String contactPhone) {
         this.contactPhone = contactPhone;
     }
+
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        final BookingGuest other = (BookingGuest) o;
+        return other.getBookingId() == (this.getBookingId())
+                && other.getContactEmail().equals(this.getContactEmail())
+                && other.getContactPhone().equals(this.getContactPhone());
+    }
 }

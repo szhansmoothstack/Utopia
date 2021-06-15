@@ -98,4 +98,12 @@ public class User {
                 ", phone='" + phone + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals (Object o){
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        final User other = (User) o;
+        return other.getId()==(this.getId());
+    }
 }

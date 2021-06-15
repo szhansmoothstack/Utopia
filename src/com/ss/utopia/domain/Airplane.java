@@ -24,4 +24,13 @@ public class Airplane {
     public void setTypeID(int typeID) {
         this.typeID = typeID;
     }
+
+    @Override
+    public boolean equals (Object o){
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        final Airplane other = (Airplane) o;
+        return other.getId() == (this.getId()) && other.getTypeID() == (this.getTypeID());
+    }
+
 }

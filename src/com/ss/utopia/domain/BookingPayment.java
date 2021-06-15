@@ -34,4 +34,13 @@ public class BookingPayment {
     public void setRefunded(int refunded) {
         this.refunded = refunded;
     }
+
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        final BookingPayment other = (BookingPayment) o;
+        return other.getBookingId() == (this.getBookingId())
+                && other.getStripeId().equals(this.getStripeId())
+                && other.getRefunded()==(this.getRefunded());
+    }
 }

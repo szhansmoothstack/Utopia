@@ -37,7 +37,7 @@ public class BookingAgentDAO extends BaseDAO<BookingAgent> {
                 , new Object[]{bookingAgent.getBookingId(), bookingAgent.getAgentId()});
     }
 
-    public List<BookingAgent> readAllBookingPayments() throws SQLException, ClassNotFoundException {
+    public List<BookingAgent> readAllBookingAgents() throws SQLException, ClassNotFoundException {
         return read("select * from booking_agent",
                 null);
     }

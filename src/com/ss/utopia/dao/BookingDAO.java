@@ -39,6 +39,11 @@ public class BookingDAO extends BaseDAO<Booking> {
                 new Object[]{id}).get(0);
     }
 
+    public Booking readBookingsByBookingConfirmation(String confirmation) throws SQLException, ClassNotFoundException {
+        return read("select * from booking where confirmation_code = ?",
+                new Object[]{confirmation}).get(0);
+    }
+
     public List<Booking> readAllBookings() throws SQLException, ClassNotFoundException {
         return read("select * from booking",
                 null);

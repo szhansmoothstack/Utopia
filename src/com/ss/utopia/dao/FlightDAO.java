@@ -2,6 +2,7 @@ package com.ss.utopia.dao;
 
 import com.ss.utopia.domain.Airplane;
 import com.ss.utopia.domain.Flight;
+import com.ss.utopia.domain.Route;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -37,6 +38,10 @@ public class FlightDAO extends BaseDAO<Flight>{
 
     public Flight readFlightById (int id) throws SQLException, ClassNotFoundException {
         return read("select * from flight, where id = ?", new Object[] {id}).get(0);
+    }
+
+    public List<Flight> readFlightByRoute (Route route) throws SQLException, ClassNotFoundException {
+        return read("select * from flight, where route_id = ?", new Object[] {route.getId()});
     }
 
     public List<Flight> readAllFlights() throws SQLException, ClassNotFoundException {

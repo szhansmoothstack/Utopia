@@ -43,4 +43,14 @@ public class Booking {
                 ", confirmationCode='" + confirmationCode + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals (Object o){
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        final Booking other = (Booking) o;
+        return other.getId() == (this.getId())
+                && other.getIsActive() == (this.getIsActive())
+                && other.getConfirmationCode().equals(this.getConfirmationCode());
+    }
 }

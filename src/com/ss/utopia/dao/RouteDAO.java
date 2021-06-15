@@ -11,7 +11,6 @@ import java.util.List;
 
 public class RouteDAO extends BaseDAO<Route>{
 
-
     public RouteDAO(Connection conn) {
         super(conn);
     }
@@ -35,6 +34,7 @@ public class RouteDAO extends BaseDAO<Route>{
     public List<Route> readAllRoute() throws SQLException, ClassNotFoundException {
         return read ("select * from route", null);
     }
+
     public Route readRouteById(int id) throws SQLException, ClassNotFoundException {
         return read ("select * from route where id = ?", new Object[] {id}).get(0);
     }
@@ -44,15 +44,17 @@ public class RouteDAO extends BaseDAO<Route>{
                 new Object[] {airportCode, airportCode});
     }
 
+    public boolean doesExist(Route route) throws SQLException, ClassNotFoundException {
+        return readAllRoute().contains(route);
+    }
+
     @Override
     public List<Route> extractData(ResultSet resultSet) throws ClassNotFoundException, SQLException {
         List<Route> routes = new ArrayList<>();
 
         while (resultSet.next()){
-            Route route = new Route();
-            route.setId(resultSet.getInt("id"));
-            route.setOrigin(resultSet.getString("origin_id"));
-            route.setDestination(resultSet.getString("destination_id"));
+            Route route = new Route(resultSet.getInt("id"),resultSet.getString("origin_id"),
+                    resultSet.getString("destination_id"));
             routes.add(route);
         }
         return routes;

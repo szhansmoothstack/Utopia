@@ -89,4 +89,11 @@ public class Passenger {
                 ", address='" + address + '\'' +
                 '}';
     }
+
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        final Passenger other = (Passenger) o;
+        return other.getId() == (this.getId());
+    }
 }

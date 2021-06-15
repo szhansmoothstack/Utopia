@@ -33,11 +33,11 @@ public class BookingUserDAO extends BaseDAO<BookingUser> {
     }
 
     public void deleteBookingUser(BookingUser bookingUser) throws SQLException {
-        save("delete from booking_agent where booking_id = ? and user_id = ?"
+        save("delete from booking_user where booking_id = ? and user_id = ?"
                 , new Object[]{bookingUser.getBookingId(), bookingUser.getUserId()});
     }
 
-    public List<BookingUser> readAllBookingPayments() throws SQLException, ClassNotFoundException {
+    public List<BookingUser> readAllBookingUsers() throws SQLException, ClassNotFoundException {
         return read("select * from booking_user",
                 null);
     }

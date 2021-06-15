@@ -21,8 +21,8 @@ public class BookingGuestDAO extends BaseDAO<BookingGuest> {
     }
 
     public void updateBookingGuest(BookingGuest bookingGuest) throws SQLException {
-        save("update booking_guest set contact_email = ?, contact_phone = ?, where booking_id = ?",
-                new Object[]{bookingGuest.getContactPhone(), bookingGuest.getContactPhone(),
+        save("update booking_guest set contact_email = ?, contact_phone = ? where booking_id = ?",
+                new Object[]{bookingGuest.getContactEmail(), bookingGuest.getContactPhone(),
                         bookingGuest.getBookingId()});
     }
 
@@ -31,8 +31,8 @@ public class BookingGuestDAO extends BaseDAO<BookingGuest> {
                 , new Object[]{bookingGuest.getBookingId()});
     }
 
-    public List<BookingGuest> readAllBookingPayments() throws SQLException, ClassNotFoundException {
-        return read("select * from booking_payment",
+    public List<BookingGuest> readAllBookingGuests() throws SQLException, ClassNotFoundException {
+        return read("select * from booking_guest",
                 null);
     }
 
@@ -42,7 +42,7 @@ public class BookingGuestDAO extends BaseDAO<BookingGuest> {
 
         while (resultSet.next()) {
             BookingGuest bookingGuest = new BookingGuest(resultSet.getInt("booking_id"),
-                    resultSet.getString("contanct_email"), resultSet.getString("contact_phone"));
+                    resultSet.getString("contact_email"), resultSet.getString("contact_phone"));
             bookingGuests.add(bookingGuest);
         }
         return bookingGuests;

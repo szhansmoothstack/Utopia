@@ -15,9 +15,10 @@ public class AirplaneDAO extends BaseDAO<Airplane> {
     }
 
     public void addAirplane(Airplane a) throws SQLException {
-        save("insert into airplane (type_id) values (?)", new Object[]{
+        int newId = saveWithPk("insert into airplane (type_id) values (?)", new Object[]{
                 a.getTypeID()
         });
+        a.setId(newId);
     }
 
     public void updateAirplane(Airplane a) throws SQLException {

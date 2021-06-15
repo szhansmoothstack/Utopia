@@ -24,4 +24,12 @@ public class FlightBookings {
         this.flightId = flightId;
         this.bookingId = bookingId;
     }
+
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        final FlightBookings other = (FlightBookings) o;
+        return other.getFlightId() == (this.getFlightId())
+                && other.getBookingId()==(this.getBookingId());
+    }
 }

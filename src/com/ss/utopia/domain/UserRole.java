@@ -24,4 +24,13 @@ public class UserRole {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public boolean equals (Object o){
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        final UserRole other = (UserRole) o;
+        return other.getId()==(this.getId())
+                && other.getName().equals(this.getName());
+    }
 }

@@ -24,4 +24,13 @@ public class BookingAgent {
     public void setAgentId(int agentId) {
         this.agentId = agentId;
     }
+
+    @Override
+    public boolean equals (Object o){
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        final BookingAgent other = (BookingAgent) o;
+        return other.getAgentId() == (this.getAgentId())
+                && other.getBookingId() ==(this.getBookingId());
+    }
 }

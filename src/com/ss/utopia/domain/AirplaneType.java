@@ -4,6 +4,7 @@ public class AirplaneType {
     private int id;
     private int maxCapacity;
     private String name;
+
     public AirplaneType(int id, int maxCapacity, String name) {
         this.id = id;
         this.maxCapacity = maxCapacity;
@@ -39,5 +40,13 @@ public class AirplaneType {
                 ", maxCapacity=" + maxCapacity +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals (Object o){
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        final AirplaneType other = (AirplaneType) o;
+        return other.getId() == (this.getId());
     }
 }

@@ -24,4 +24,12 @@ public class BookingUser {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        final BookingUser other = (BookingUser) o;
+        return other.getBookingId() == (this.getBookingId())
+                && other.getUserId()==(this.getUserId());
+    }
 }

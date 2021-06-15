@@ -78,4 +78,16 @@ public class Flight {
                 ", seatPrice=" + seatPrice +
                 '}';
     }
+
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        final Flight other = (Flight) o;
+        return other.getId() == (this.getId())
+                && other.getRouteId()==(this.getRouteId())
+                && other.getAirplane_id()==(this.getAirplane_id())
+                && other.getDeparture_time().equals(this.getDeparture_time())
+                && other.getReservedSeats()==(this.getReservedSeats())
+                && other.getSeatPrice()==(this.getSeatPrice());
+    }
 }

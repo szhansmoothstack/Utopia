@@ -49,4 +49,12 @@ public class Airport {
         this.routeList = routeList;
     }
 
+    @Override
+    public boolean equals (Object o){
+        if (o == null) return false;
+        if (o.getClass() != this.getClass()) return false;
+        final Airport other = (Airport) o;
+        return other.getAirportCode().equals (this.getAirportCode())
+                && other.getCity() .equals (this.getCity());
+    }
 }

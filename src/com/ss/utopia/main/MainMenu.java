@@ -4,10 +4,14 @@ import com.ss.utopia.domain.*;
 import com.ss.utopia.service.AdminServices;
 import com.ss.utopia.service.TravelerServices;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -695,7 +699,7 @@ public class MainMenu {
         }
     }
 
-    public void printTravelerMenu() {
+    public void printTravelerMenu() throws SQLException {
         System.out.println("----------------");
         System.out.println("Welcome Traveler! What would you like to do?");
         System.out.println("1) Book a ticket");
@@ -704,7 +708,7 @@ public class MainMenu {
         handleTravelerMenu();
     }
 
-    public void handleTravelerMenu() {
+    public void handleTravelerMenu() throws SQLException {
         String ans = scanner.nextLine().trim();
         switch (ans) {
             case "1":
@@ -722,13 +726,51 @@ public class MainMenu {
 
     }
 
-    public void bookTicket() {
-        System.out.println("Pick a departure airport");
+    public void bookTicket() throws SQLException {
+        this.readAirport();
+        System.out.println("Pick a departure airport id from above list");
+        String originId = scanner.nextLine();
+        System.out.println("Pick a destination airport id from above list");
+        String destinationId = scanner.nextLine();
+        List<Route> routes = travelerServices.readAllRoutes();
+        Route route = routes.get(routes.indexOf(new Route (-1, originId, destinationId)));
 
+        List<Flight> flights = travelerServices.readFlightsByRoute(route);
+        System.out.println("----------------");
+        System.out.println("Printing out all flights with desired route");
+        int index = 1;
+        for (Flight flight : flights){
+            System.out.println(index + ") " + flight.toString());
+            index ++;
+        }
+        System.out.println(index + ") previous menu");
+        System.out.println("Pick an option from above");
+        int ans = scanner.nextInt();
+        scanner.nextLine();
+
+
+        if (ans == index) printTravelerMenu();
+        else if (ans < index){
+            int flightId = flights.get(ans - 1).getId();
+            travelerServices.addBooking(generateConfirmation(), flightId);
+        }else{
+            System.out.println("Invalid input please choose a valid flight");
+            printTravelerMenu();
+        }
     }
 
-    public void cancelTrip() {
+    private String generateConfirmation(){
+        byte[] array = new byte[16]; // length is bounded by 7
+        new Random().nextBytes(array);
+        return new String(array, StandardCharsets.UTF_8);
+    }
 
+    public void cancelTrip() throws SQLException {
+        System.out.println("----------------");
+        System.out.println("Enter confirmation of flight to cancel");
+        String confirmation = scanner.nextLine();
+        travelerServices.deleteBooking(confirmation);
+        System.out.println("Flight deleted");
     }
 
 
